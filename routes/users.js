@@ -22,7 +22,7 @@ router.get("/:id", function (req, res, next) {
 	});
 });
 
-// POST (crear) de un nuevo usuario
+// crear de un nuevo usuario
 router.post("/signup", function (req, res, next) {
 	User.create(req.body, function (err, userinfo) {
 		if (err) res.status(500).send(err);
@@ -30,7 +30,7 @@ router.post("/signup", function (req, res, next) {
 	});
 });
 
-// PUT (actualizar) de un usuario por su Id
+// actualizar de un usuario por su Id
 router.put("/:id", function (req, res, next) {
 	User.findByIdAndUpdate(req.params.id, req.body, function (err, userinfo) {
 		if (err) res.status(500).send(err);
@@ -38,7 +38,7 @@ router.put("/:id", function (req, res, next) {
 	});
 });
 
-// DELETE (eliminar) de un usuario por su Id
+// eliminar de un usuario por su Id
 router.delete("/:id", function (req, res, next) {
 	User.findByIdAndDelete(req.params.id, function (err, userinfo) {
 		if (err) res.status(500).send(err);
@@ -48,13 +48,13 @@ router.delete("/:id", function (req, res, next) {
 
 //POST para iniciar sesion 
 router.post("/signin", function (req, res, next){
-  const {username, password} = req.body; //lo que se necesita para loguearse
+  const {username, password} = req.body; 
 
   User.findOne({username})
-  .then(user => { //comprobacion nombre usuario
+  .then(user => {
     if(!user) return res.status(404).send('User no found');
 
-    user.comparePassword(password, (err, isMatch) =>{ //comprobacion contraceña
+    user.comparePassword(password, (err, isMatch) =>{ 
       if(err) return res.status(500).send(err);
       if(!isMatch) return res.status(401).send('Incorrect password');
 
